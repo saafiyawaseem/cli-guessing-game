@@ -1,23 +1,27 @@
-#!/usr/bin/env node
-import inquirer from "inquirer";
+import inquirer from "inquirer"
+let todos:any= []//shopper[]
+let condition = true
 
-// 1) computer will generate random number -Done
+while(condition)
+{    
+    let todosQuestion= await inquirer.prompt(
+    [
+    {
+      name: "firstQuestion",
+      type: "input",
+      message:  "what would you like to add in your todos?",
+    },
 
-// 2) user input for guessing number-Done
-
-// 3) compare user input with cumputer generated number and show result-Done
-
-const randomnumber = Math.floor(Math.random() * 6 + 1);
-
-const answer = await inquirer.prompt([
-  {
-    name: "userGuessedNumber",
-    type: "number",
-    message: "please guess a number between *1-6:",
-  },
-]);
-if (answer.userGuessedNumber === randomnumber) {
-  console.log("congratulation! you guessed right number. ");
-} else {
-  console.log("you guessed wrong number");
-}
+    {
+        name:"secondQuestion",
+        type:"confirm",
+        message:"would you like to add more in your todos?",
+        default:"true",
+   },
+]
+);
+todosQuestion.push(todosQuestion.firstQuestion);
+console.log(todos);
+//The loop is running on the base of this veriable condition.
+condition=todosQuestion.secondQuestion;
+};
